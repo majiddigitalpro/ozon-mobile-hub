@@ -17,7 +17,7 @@ import { SectionHeading } from "@/components/site/Bits";
 import { BRANCHES } from "@/data/branches";
 import { REPAIR_PROBLEMS } from "@/data/repairs";
 import { useBranch } from "@/lib/branch-store";
-import { waLink, waMessages } from "@/lib/whatsapp";
+import { waLink } from "@/lib/whatsapp";
 
 export const Route = createFileRoute("/repair/book")({
   head: () => ({

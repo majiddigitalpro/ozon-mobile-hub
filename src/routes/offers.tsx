@@ -3,7 +3,7 @@ import { MessageCircle } from "lucide-react";
 import { useState } from "react";
 
 import { Button } from "@/components/ui/button";
-import { Badge, EmptyState, SectionHeading } from "@/components/site/Bits";
+import { Badge, SectionHeading } from "@/components/site/Bits";
 import { activeOffers, OFFER_CATEGORIES } from "@/data/offers";
 import { useBranch } from "@/lib/branch-store";
 import { waLink, waMessages } from "@/lib/whatsapp";
@@ -110,16 +110,6 @@ function OffersPage() {
             )}
           </div>
 
-          {offers.length === 0 && (
-            <div className="mt-8">
-              <EmptyState
-                title="No active offers right now"
-                body="Want today's best available deal? Talk to Ozon Mobiles."
-                ctaLabel="Ask About Today's Deals"
-                message={waMessages.offers}
-              />
-            </div>
-          )}
         </div>
       </section>
     </>
