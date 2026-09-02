@@ -11,9 +11,13 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AccessoriesRouteImport } from './routes/accessories'
+import { Route as OffersRouteImport } from './routes/offers'
 import { Route as PhonesIndexRouteImport } from './routes/phones.index'
 import { Route as PhonesProductIdRouteImport } from './routes/phones.$productId'
 import { Route as RepairIndexRouteImport } from './routes/repair.index'
+import { Route as RepairBookRouteImport } from './routes/repair.book'
+import { Route as StoresIndexRouteImport } from './routes/stores.index'
+import { Route as StoresBranchRouteImport } from './routes/stores.$branch'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -23,6 +27,11 @@ const IndexRoute = IndexRouteImport.update({
 const AccessoriesRoute = AccessoriesRouteImport.update({
   id: '/accessories',
   path: '/accessories',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OffersRoute = OffersRouteImport.update({
+  id: '/offers',
+  path: '/offers',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PhonesIndexRoute = PhonesIndexRouteImport.update({
@@ -40,50 +49,102 @@ const RepairIndexRoute = RepairIndexRouteImport.update({
   path: '/repair/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const RepairBookRoute = RepairBookRouteImport.update({
+  id: '/repair/book',
+  path: '/repair/book',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StoresIndexRoute = StoresIndexRouteImport.update({
+  id: '/stores/',
+  path: '/stores/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StoresBranchRoute = StoresBranchRouteImport.update({
+  id: '/stores/$branch',
+  path: '/stores/$branch',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/accessories': typeof AccessoriesRoute
+  '/offers': typeof OffersRoute
   '/phones/$productId': typeof PhonesProductIdRoute
+  '/repair/book': typeof RepairBookRoute
+  '/stores/$branch': typeof StoresBranchRoute
   '/phones/': typeof PhonesIndexRoute
   '/repair/': typeof RepairIndexRoute
+  '/stores/': typeof StoresIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/accessories': typeof AccessoriesRoute
+  '/offers': typeof OffersRoute
   '/phones/$productId': typeof PhonesProductIdRoute
+  '/repair/book': typeof RepairBookRoute
+  '/stores/$branch': typeof StoresBranchRoute
   '/phones': typeof PhonesIndexRoute
   '/repair': typeof RepairIndexRoute
+  '/stores': typeof StoresIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/accessories': typeof AccessoriesRoute
+  '/offers': typeof OffersRoute
   '/phones/$productId': typeof PhonesProductIdRoute
+  '/repair/book': typeof RepairBookRoute
+  '/stores/$branch': typeof StoresBranchRoute
   '/phones/': typeof PhonesIndexRoute
   '/repair/': typeof RepairIndexRoute
+  '/stores/': typeof StoresIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    '/' | '/accessories' | '/phones/$productId' | '/phones/' | '/repair/'
+    | '/'
+    | '/accessories'
+    | '/offers'
+    | '/phones/$productId'
+    | '/repair/book'
+    | '/stores/$branch'
+    | '/phones/'
+    | '/repair/'
+    | '/stores/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/accessories' | '/phones/$productId' | '/phones' | '/repair'
+  to:
+    | '/'
+    | '/accessories'
+    | '/offers'
+    | '/phones/$productId'
+    | '/repair/book'
+    | '/stores/$branch'
+    | '/phones'
+    | '/repair'
+    | '/stores'
   id:
     | '__root__'
     | '/'
     | '/accessories'
+    | '/offers'
     | '/phones/$productId'
+    | '/repair/book'
+    | '/stores/$branch'
     | '/phones/'
     | '/repair/'
+    | '/stores/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AccessoriesRoute: typeof AccessoriesRoute
+  OffersRoute: typeof OffersRoute
   PhonesProductIdRoute: typeof PhonesProductIdRoute
+  RepairBookRoute: typeof RepairBookRoute
+  StoresBranchRoute: typeof StoresBranchRoute
   PhonesIndexRoute: typeof PhonesIndexRoute
   RepairIndexRoute: typeof RepairIndexRoute
+  StoresIndexRoute: typeof StoresIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -100,6 +161,13 @@ declare module '@tanstack/react-router' {
       path: '/accessories'
       fullPath: '/accessories'
       preLoaderRoute: typeof AccessoriesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/offers': {
+      id: '/offers'
+      path: '/offers'
+      fullPath: '/offers'
+      preLoaderRoute: typeof OffersRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/phones/': {
@@ -123,15 +191,40 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RepairIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/repair/book': {
+      id: '/repair/book'
+      path: '/repair/book'
+      fullPath: '/repair/book'
+      preLoaderRoute: typeof RepairBookRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/stores/': {
+      id: '/stores/'
+      path: '/stores'
+      fullPath: '/stores/'
+      preLoaderRoute: typeof StoresIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/stores/$branch': {
+      id: '/stores/$branch'
+      path: '/stores/$branch'
+      fullPath: '/stores/$branch'
+      preLoaderRoute: typeof StoresBranchRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AccessoriesRoute: AccessoriesRoute,
+  OffersRoute: OffersRoute,
   PhonesProductIdRoute: PhonesProductIdRoute,
+  RepairBookRoute: RepairBookRoute,
+  StoresBranchRoute: StoresBranchRoute,
   PhonesIndexRoute: PhonesIndexRoute,
   RepairIndexRoute: RepairIndexRoute,
+  StoresIndexRoute: StoresIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
