@@ -10,11 +10,19 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AccessoriesRouteImport } from './routes/accessories'
 import { Route as PhonesIndexRouteImport } from './routes/phones.index'
+import { Route as PhonesProductIdRouteImport } from './routes/phones.$productId'
+import { Route as RepairIndexRouteImport } from './routes/repair.index'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AccessoriesRoute = AccessoriesRouteImport.update({
+  id: '/accessories',
+  path: '/accessories',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PhonesIndexRoute = PhonesIndexRouteImport.update({
@@ -22,31 +30,60 @@ const PhonesIndexRoute = PhonesIndexRouteImport.update({
   path: '/phones/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PhonesProductIdRoute = PhonesProductIdRouteImport.update({
+  id: '/phones/$productId',
+  path: '/phones/$productId',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RepairIndexRoute = RepairIndexRouteImport.update({
+  id: '/repair/',
+  path: '/repair/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/accessories': typeof AccessoriesRoute
+  '/phones/$productId': typeof PhonesProductIdRoute
   '/phones/': typeof PhonesIndexRoute
+  '/repair/': typeof RepairIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/accessories': typeof AccessoriesRoute
+  '/phones/$productId': typeof PhonesProductIdRoute
   '/phones': typeof PhonesIndexRoute
+  '/repair': typeof RepairIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/accessories': typeof AccessoriesRoute
+  '/phones/$productId': typeof PhonesProductIdRoute
   '/phones/': typeof PhonesIndexRoute
+  '/repair/': typeof RepairIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/phones/'
+  fullPaths:
+    '/' | '/accessories' | '/phones/$productId' | '/phones/' | '/repair/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/phones'
-  id: '__root__' | '/' | '/phones/'
+  to: '/' | '/accessories' | '/phones/$productId' | '/phones' | '/repair'
+  id:
+    | '__root__'
+    | '/'
+    | '/accessories'
+    | '/phones/$productId'
+    | '/phones/'
+    | '/repair/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AccessoriesRoute: typeof AccessoriesRoute
+  PhonesProductIdRoute: typeof PhonesProductIdRoute
   PhonesIndexRoute: typeof PhonesIndexRoute
+  RepairIndexRoute: typeof RepairIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -58,6 +95,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/accessories': {
+      id: '/accessories'
+      path: '/accessories'
+      fullPath: '/accessories'
+      preLoaderRoute: typeof AccessoriesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/phones/': {
       id: '/phones/'
       path: '/phones'
@@ -65,12 +109,29 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PhonesIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/phones/$productId': {
+      id: '/phones/$productId'
+      path: '/phones/$productId'
+      fullPath: '/phones/$productId'
+      preLoaderRoute: typeof PhonesProductIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/repair/': {
+      id: '/repair/'
+      path: '/repair'
+      fullPath: '/repair/'
+      preLoaderRoute: typeof RepairIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AccessoriesRoute: AccessoriesRoute,
+  PhonesProductIdRoute: PhonesProductIdRoute,
   PhonesIndexRoute: PhonesIndexRoute,
+  RepairIndexRoute: RepairIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
