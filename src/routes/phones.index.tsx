@@ -23,10 +23,12 @@ import { waMessages } from "@/lib/whatsapp";
 type Search = { brand?: string; q?: string };
 
 export const Route = createFileRoute("/phones/")({
-  validateSearch: (search: Record<string, unknown>): Search => ({
-    brand: typeof search.brand === "string" ? search.brand : undefined,
-    q: typeof search.q === "string" ? search.q : undefined,
-  }),
+  validateSearch: (search: Record<string, unknown>): Search => {
+    const validated: Search = {};
+    if (typeof search["brand"] === "string") validated.brand = search["brand"];
+    if (typeof search["q"] === "string") validated.q = search["q"];
+    return validated;
+  },
   head: () => ({
     meta: [
       { title: "Smartphones in Triprayar & Chavakkad | Ozon Mobiles" },
@@ -398,7 +400,9 @@ function FilterPanel({
           value={[filters.minCamera]}
           max={200}
           step={2}
-          onValueChange={([v]) => setFilters((f) => ({ ...f, minCamera: v }))}
+          onValueChange={([v]) => {
+            if (v !== undefined) setFilters((f) => ({ ...f, minCamera: v }));
+          }}
         />
       </div>
 
@@ -412,7 +416,9 @@ function FilterPanel({
           value={[filters.minDisplay]}
           max={7}
           step={0.1}
-          onValueChange={([v]) => setFilters((f) => ({ ...f, minDisplay: v }))}
+          onValueChange={([v]) => {
+            if (v !== undefined) setFilters((f) => ({ ...f, minDisplay: v }));
+          }}
         />
       </div>
 
@@ -426,7 +432,9 @@ function FilterPanel({
           value={[filters.minBattery]}
           max={6000}
           step={100}
-          onValueChange={([v]) => setFilters((f) => ({ ...f, minBattery: v }))}
+          onValueChange={([v]) => {
+            if (v !== undefined) setFilters((f) => ({ ...f, minBattery: v }));
+          }}
         />
       </div>
 

@@ -119,12 +119,12 @@ export function Footer() {
         <div className="shell flex flex-col gap-3 py-6 text-xs text-navy-foreground/60 sm:flex-row sm:items-center sm:justify-between">
           <p>© {new Date().getFullYear()} Ozon Mobiles. All About Mobiles.</p>
           <div className="flex gap-5">
-            <Link to="/privacy" className="hover:text-navy-foreground">
+            <a href="/privacy" className="hover:text-navy-foreground">
               Privacy Policy
-            </Link>
-            <Link to="/terms" className="hover:text-navy-foreground">
+            </a>
+            <a href="/terms" className="hover:text-navy-foreground">
               Terms &amp; Conditions
-            </Link>
+            </a>
           </div>
         </div>
       </div>

@@ -19,7 +19,7 @@ export type Branch = {
   seoArea: string;
 };
 
-export const BRANCHES: Branch[] = [
+export const BRANCHES: [Branch, ...Branch[]] = [
   {
     id: "triprayar",
     name: "Ozon Mobiles Triprayar",
