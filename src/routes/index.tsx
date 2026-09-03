@@ -14,7 +14,7 @@ import {
   Wrench,
 } from "lucide-react";
 
-import heroPhones from "@/assets/hero-phones.jpg";
+import heroProductLineup from "@/assets/hero-product-lineup.png";
 import repairBench from "@/assets/repair-bench.jpg";
 import accessoriesImg from "@/assets/accessories.jpg";
 import { Button } from "@/components/ui/button";
@@ -32,7 +32,7 @@ import { waLink, waMessages } from "@/lib/whatsapp";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Ozon Mobiles | Smartphones, Accessories & Phone Repair in Kerala" },
+      { title: "Ozon Mobiles | Phones & Repair in Kerala" },
       {
         name: "description",
         content:
@@ -47,6 +47,8 @@ export const Route = createFileRoute("/")({
         content:
           "Smartphones, accessories and expert iPhone & Android repair in Triprayar and Chavakkad.",
       },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
       { property: "og:url", content: "/" },
     ],
     links: [{ rel: "canonical", href: "/" }],
@@ -133,27 +135,28 @@ function Home() {
   return (
     <>
       {/* HERO ---------------------------------------------------------- */}
-      <section className="surface-dark relative overflow-hidden">
-        <div className="hairline-grid absolute inset-0 opacity-60" aria-hidden="true" />
-        <div className="shell relative grid items-center gap-10 py-14 md:py-20 lg:grid-cols-[1.05fr_1fr] lg:gap-14 lg:py-24">
-          <div className="reveal">
-            <p className="eyebrow text-cyan">Triprayar · Chavakkad · Kerala</p>
-            <h1 className="mt-4 text-balance text-[2rem] font-extrabold leading-[1.08] text-navy-foreground sm:text-5xl lg:text-[3.4rem]">
-              Your Phone. Your Choice.{" "}
-              <span className="text-cyan">Your Trusted Mobile Store.</span>
+      <section className="relative overflow-hidden bg-background">
+        <div className="hero-wash absolute inset-0" aria-hidden="true" />
+        <div className="shell relative grid min-h-[calc(100svh-4rem)] items-center gap-8 pb-10 pt-14 md:min-h-[42rem] md:pb-14 md:pt-16 lg:grid-cols-[0.82fr_1.35fr] lg:gap-4 lg:py-16">
+          <div className="reveal relative z-10 lg:py-6">
+            <p className="eyebrow text-electric">Triprayar · Chavakkad · Kerala</p>
+            <h1 className="mt-5 max-w-[35rem] text-[2.35rem] font-extrabold leading-[1.08] text-foreground sm:text-5xl lg:text-[3.5rem]">
+              Your Phone.<br />
+              Your Choice.<br />
+              <span className="text-electric">Your Trusted<br className="hidden lg:block" /> Mobile Store.</span>
             </h1>
-            <p className="mt-5 max-w-xl text-pretty text-sm leading-relaxed text-navy-foreground/75 sm:text-base">
+            <p className="mt-6 max-w-[32rem] text-sm leading-7 text-muted-foreground sm:text-base">
               Explore smartphones, accessories and expert iPhone &amp; Android repairs at Ozon
               Mobiles. Great value, trusted service and local support in Triprayar and Chavakkad.
             </p>
-            <div className="mt-8 flex flex-wrap gap-3">
+            <div className="mt-7 flex flex-wrap gap-3">
               <Button asChild variant="hero" size="xl">
                 <Link to="/phones">
                   Explore Phones
                   <ArrowRight />
                 </Link>
               </Button>
-              <Button asChild variant="onDark" size="xl">
+              <Button asChild variant="quiet" size="xl">
                 <Link to="/repair/book">
                   <Wrench />
                   Book a Repair
@@ -170,19 +173,19 @@ function Home() {
                 </a>
               </Button>
             </div>
-            <div className="mt-8 max-w-xs">
-              <p className="eyebrow mb-2 text-navy-foreground/50">Choose your Ozon Mobiles</p>
-              <BranchSwitcher onDark />
+            <div className="mt-7 max-w-xs">
+              <p className="eyebrow mb-2 text-electric">Choose your Ozon Mobiles</p>
+              <BranchSwitcher />
             </div>
           </div>
 
-          <div className="relative">
+          <div className="relative -mx-8 self-end sm:-mx-4 lg:-mr-28 lg:ml-[-4rem] lg:self-center">
             <img
-              src={heroPhones}
-              alt="Modern smartphones available at Ozon Mobiles"
+              src={heroProductLineup}
+              alt="Smartphones, tablet, smartwatch, earbuds, headphones and speaker available at Ozon Mobiles"
               width={1600}
-              height={1200}
-              className="w-full rounded-2xl border border-navy-foreground/10 object-cover shadow-[var(--shadow-lift)]"
+              height={912}
+              className="relative z-10 w-full object-contain drop-shadow-2xl"
             />
           </div>
         </div>
@@ -208,7 +211,7 @@ function Home() {
             title="Everything your phone needs, in one local store"
             body="Whether you are upgrading, protecting your device or fixing a problem, there is a clear path for you at Ozon Mobiles."
           />
-          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-10 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
             {SERVICES.map(({ icon: Icon, title, body, cta, to }, i) => (
               <article
                 key={title}

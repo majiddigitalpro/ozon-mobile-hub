@@ -213,6 +213,12 @@
   background-size: 72px 72px;
 }
 
+@utility hero-wash {
+  background:
+    radial-gradient(75% 80% at 78% 48%, color-mix(in oklab, var(--primary) 5%, transparent), transparent 72%),
+    linear-gradient(135deg, transparent 62%, color-mix(in oklab, var(--primary) 2%, transparent) 62%, transparent 82%);
+}
+
 @utility glass {
   background: oklch(1 0 0 / 70%);
   backdrop-filter: blur(14px) saturate(140%);

@@ -32,9 +32,9 @@ export function ProductCard({ product }: { product: Product }) {
         </span>
       </Link>
 
-      <div className="flex flex-1 flex-col p-4">
+      <div className="flex flex-1 flex-col p-3 sm:p-4">
         <p className="eyebrow text-electric">{product.brand}</p>
-        <h3 className="mt-1.5 font-display text-base font-bold leading-snug">
+        <h3 className="mt-1.5 font-display text-sm font-bold leading-snug sm:text-base">
           <Link
             to="/phones/$productId"
             params={{ productId: product.id }}
@@ -43,26 +43,27 @@ export function ProductCard({ product }: { product: Product }) {
             {product.name}
           </Link>
         </h3>
-        <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground">{product.keySpec}</p>
+        <p className="mt-1.5 line-clamp-2 text-[0.7rem] leading-relaxed text-muted-foreground sm:text-xs">{product.keySpec}</p>
 
-        <div className="mt-3 flex items-baseline justify-between gap-2">
+        <div className="mt-3 flex flex-col items-start gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-2">
           <span className="font-display text-sm font-bold text-foreground">
             {priceLabel(product)}
           </span>
-          <span className="text-[0.7rem] font-medium text-muted-foreground">
+          <span className="text-[0.65rem] font-medium text-muted-foreground sm:text-[0.7rem]">
             Enquire for availability
           </span>
         </div>
 
-        <div className="mt-4 flex flex-col gap-2">
+        <div className="mt-3 flex flex-col gap-1.5 sm:mt-4 sm:gap-2">
           <Button asChild variant="whatsapp" size="sm">
             <a
               href={waLink(waMessages.product(product.name), branchId)}
               target="_blank"
               rel="noopener noreferrer"
             >
-              <MessageCircle />
-              Enquire on WhatsApp
+              <MessageCircle className="hidden sm:block" />
+              <span className="sm:hidden">Enquire</span>
+              <span className="hidden sm:inline">Enquire on WhatsApp</span>
             </a>
           </Button>
           <Button asChild variant="ghost" size="sm">
