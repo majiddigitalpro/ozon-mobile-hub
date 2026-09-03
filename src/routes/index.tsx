@@ -211,7 +211,7 @@ function Home() {
             title="Everything your phone needs, in one local store"
             body="Whether you are upgrading, protecting your device or fixing a problem, there is a clear path for you at Ozon Mobiles."
           />
-          <div className="mt-10 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
+          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {SERVICES.map(({ icon: Icon, title, body, cta, to }, i) => (
               <article
                 key={title}
@@ -276,7 +276,7 @@ function Home() {
               </Link>
             </Button>
           </div>
-          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-10 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
             {featured.map((p) => (
               <ProductCard key={p.id} product={p} />
             ))}
