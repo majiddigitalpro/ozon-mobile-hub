@@ -14,16 +14,201 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      accessories: {
+        Row: {
+          blurb: string
+          category: string
+          created_at: string
+          id: string
+          image_url: string | null
+          name: string
+          price: number | null
+          published: boolean
+          sort_order: number
+          updated_at: string
+        }
+        Insert: {
+          blurb?: string
+          category: string
+          created_at?: string
+          id: string
+          image_url?: string | null
+          name: string
+          price?: number | null
+          published?: boolean
+          sort_order?: number
+          updated_at?: string
+        }
+        Update: {
+          blurb?: string
+          category?: string
+          created_at?: string
+          id?: string
+          image_url?: string | null
+          name?: string
+          price?: number | null
+          published?: boolean
+          sort_order?: number
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      offers: {
+        Row: {
+          active: boolean
+          branches: string[]
+          category: string
+          created_at: string
+          description: string
+          expires_on: string | null
+          id: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          active?: boolean
+          branches?: string[]
+          category: string
+          created_at?: string
+          description?: string
+          expires_on?: string | null
+          id?: string
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          active?: boolean
+          branches?: string[]
+          category?: string
+          created_at?: string
+          description?: string
+          expires_on?: string | null
+          id?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      products: {
+        Row: {
+          battery: number
+          branches: string[]
+          brand: string
+          colours: string[]
+          condition: string
+          created_at: string
+          display_inches: number
+          featured: boolean
+          finance_available: boolean
+          five_g: boolean
+          id: string
+          image_url: string | null
+          key_spec: string
+          main_camera_mp: number
+          name: string
+          original_price: number | null
+          os: string
+          popular: boolean
+          price: number | null
+          published: boolean
+          ram: number[]
+          sort_order: number
+          specs: Json
+          storage: number[]
+          updated_at: string
+        }
+        Insert: {
+          battery?: number
+          branches?: string[]
+          brand: string
+          colours?: string[]
+          condition?: string
+          created_at?: string
+          display_inches?: number
+          featured?: boolean
+          finance_available?: boolean
+          five_g?: boolean
+          id: string
+          image_url?: string | null
+          key_spec?: string
+          main_camera_mp?: number
+          name: string
+          original_price?: number | null
+          os?: string
+          popular?: boolean
+          price?: number | null
+          published?: boolean
+          ram?: number[]
+          sort_order?: number
+          specs?: Json
+          storage?: number[]
+          updated_at?: string
+        }
+        Update: {
+          battery?: number
+          branches?: string[]
+          brand?: string
+          colours?: string[]
+          condition?: string
+          created_at?: string
+          display_inches?: number
+          featured?: boolean
+          finance_available?: boolean
+          five_g?: boolean
+          id?: string
+          image_url?: string | null
+          key_spec?: string
+          main_camera_mp?: number
+          name?: string
+          original_price?: number | null
+          os?: string
+          popular?: boolean
+          price?: number | null
+          published?: boolean
+          ram?: number[]
+          sort_order?: number
+          specs?: Json
+          storage?: number[]
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          created_at: string
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin" | "staff"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +335,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin", "staff"],
+    },
   },
 } as const
