@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as AccessoriesRouteImport } from './routes/accessories'
+import { Route as AuthRouteImport } from './routes/auth'
 import { Route as OffersRouteImport } from './routes/offers'
 import { Route as PhonesIndexRouteImport } from './routes/phones.index'
 import { Route as PhonesProductIdRouteImport } from './routes/phones.$productId'
@@ -33,6 +34,11 @@ const AboutRoute = AboutRouteImport.update({
 const AccessoriesRoute = AccessoriesRouteImport.update({
   id: '/accessories',
   path: '/accessories',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
 const OffersRoute = OffersRouteImport.update({
@@ -75,6 +81,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/accessories': typeof AccessoriesRoute
+  '/auth': typeof AuthRoute
   '/offers': typeof OffersRoute
   '/phones/$productId': typeof PhonesProductIdRoute
   '/repair/book': typeof RepairBookRoute
@@ -87,6 +94,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/accessories': typeof AccessoriesRoute
+  '/auth': typeof AuthRoute
   '/offers': typeof OffersRoute
   '/phones/$productId': typeof PhonesProductIdRoute
   '/repair/book': typeof RepairBookRoute
@@ -100,6 +108,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/accessories': typeof AccessoriesRoute
+  '/auth': typeof AuthRoute
   '/offers': typeof OffersRoute
   '/phones/$productId': typeof PhonesProductIdRoute
   '/repair/book': typeof RepairBookRoute
@@ -114,6 +123,7 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/accessories'
+    | '/auth'
     | '/offers'
     | '/phones/$productId'
     | '/repair/book'
@@ -126,6 +136,7 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/accessories'
+    | '/auth'
     | '/offers'
     | '/phones/$productId'
     | '/repair/book'
@@ -138,6 +149,7 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/accessories'
+    | '/auth'
     | '/offers'
     | '/phones/$productId'
     | '/repair/book'
@@ -151,6 +163,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
   AccessoriesRoute: typeof AccessoriesRoute
+  AuthRoute: typeof AuthRoute
   OffersRoute: typeof OffersRoute
   PhonesProductIdRoute: typeof PhonesProductIdRoute
   RepairBookRoute: typeof RepairBookRoute
@@ -181,6 +194,13 @@ declare module '@tanstack/react-router' {
       path: '/accessories'
       fullPath: '/accessories'
       preLoaderRoute: typeof AccessoriesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/offers': {
@@ -239,6 +259,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   AccessoriesRoute: AccessoriesRoute,
+  AuthRoute: AuthRoute,
   OffersRoute: OffersRoute,
   PhonesProductIdRoute: PhonesProductIdRoute,
   RepairBookRoute: RepairBookRoute,
