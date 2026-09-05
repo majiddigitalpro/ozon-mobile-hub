@@ -10,10 +10,12 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as AccessoriesRouteImport } from './routes/accessories'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as OffersRouteImport } from './routes/offers'
+import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
 import { Route as PhonesIndexRouteImport } from './routes/phones.index'
 import { Route as PhonesProductIdRouteImport } from './routes/phones.$productId'
 import { Route as RepairIndexRouteImport } from './routes/repair.index'
@@ -24,6 +26,10 @@ import { Route as StoresBranchRouteImport } from './routes/stores.$branch'
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AboutRoute = AboutRouteImport.update({
@@ -45,6 +51,11 @@ const OffersRoute = OffersRouteImport.update({
   id: '/offers',
   path: '/offers',
   getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedAdminRoute = AuthenticatedAdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const PhonesIndexRoute = PhonesIndexRouteImport.update({
   id: '/phones/',
@@ -83,6 +94,7 @@ export interface FileRoutesByFullPath {
   '/accessories': typeof AccessoriesRoute
   '/auth': typeof AuthRoute
   '/offers': typeof OffersRoute
+  '/admin': typeof AuthenticatedAdminRoute
   '/phones/$productId': typeof PhonesProductIdRoute
   '/repair/book': typeof RepairBookRoute
   '/stores/$branch': typeof StoresBranchRoute
@@ -96,6 +108,7 @@ export interface FileRoutesByTo {
   '/accessories': typeof AccessoriesRoute
   '/auth': typeof AuthRoute
   '/offers': typeof OffersRoute
+  '/admin': typeof AuthenticatedAdminRoute
   '/phones/$productId': typeof PhonesProductIdRoute
   '/repair/book': typeof RepairBookRoute
   '/stores/$branch': typeof StoresBranchRoute
@@ -106,10 +119,12 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/about': typeof AboutRoute
   '/accessories': typeof AccessoriesRoute
   '/auth': typeof AuthRoute
   '/offers': typeof OffersRoute
+  '/_authenticated/admin': typeof AuthenticatedAdminRoute
   '/phones/$productId': typeof PhonesProductIdRoute
   '/repair/book': typeof RepairBookRoute
   '/stores/$branch': typeof StoresBranchRoute
@@ -125,6 +140,7 @@ export interface FileRouteTypes {
     | '/accessories'
     | '/auth'
     | '/offers'
+    | '/admin'
     | '/phones/$productId'
     | '/repair/book'
     | '/stores/$branch'
@@ -138,6 +154,7 @@ export interface FileRouteTypes {
     | '/accessories'
     | '/auth'
     | '/offers'
+    | '/admin'
     | '/phones/$productId'
     | '/repair/book'
     | '/stores/$branch'
@@ -147,10 +164,12 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/_authenticated'
     | '/about'
     | '/accessories'
     | '/auth'
     | '/offers'
+    | '/_authenticated/admin'
     | '/phones/$productId'
     | '/repair/book'
     | '/stores/$branch'
@@ -161,6 +180,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AboutRoute: typeof AboutRoute
   AccessoriesRoute: typeof AccessoriesRoute
   AuthRoute: typeof AuthRoute
@@ -180,6 +200,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/about': {
@@ -209,6 +236,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/offers'
       preLoaderRoute: typeof OffersRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/admin': {
+      id: '/_authenticated/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AuthenticatedAdminRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
     }
     '/phones/': {
       id: '/phones/'
@@ -255,8 +289,20 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedAdminRoute: typeof AuthenticatedAdminRoute
+}
+
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedAdminRoute: AuthenticatedAdminRoute,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AboutRoute: AboutRoute,
   AccessoriesRoute: AccessoriesRoute,
   AuthRoute: AuthRoute,
