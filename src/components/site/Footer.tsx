@@ -125,6 +125,9 @@ export function Footer() {
             <a href="/terms" className="hover:text-navy-foreground">
               Terms &amp; Conditions
             </a>
+            <Link to="/auth" className="hover:text-navy-foreground">
+              Staff Login
+            </Link>
           </div>
         </div>
       </div>
