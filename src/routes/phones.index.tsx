@@ -125,7 +125,7 @@ function PhonesPage() {
       default:
         return [...list].sort((a, b) => Number(b.featured) - Number(a.featured));
     }
-  }, [filters, query, sort]);
+  }, [allProducts, filters, query, sort]);
 
   const activeCount =
     filters.brands.length +
