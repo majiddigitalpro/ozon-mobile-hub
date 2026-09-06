@@ -65,7 +65,6 @@ export const Route = createFileRoute("/phones/$productId")({
 function ProductPage() {
   const { product, related } = Route.useLoaderData();
   const { branchId } = useBranch();
-  const related = relatedProducts(product);
 
   return (
     <>
