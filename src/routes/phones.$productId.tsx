@@ -7,15 +7,20 @@ import { Badge, SectionHeading } from "@/components/site/Bits";
 import { ProductCard } from "@/components/site/ProductCard";
 import { BRANCHES, FINANCE_PARTNERS, getBranch } from "@/data/branches";
 import { ACCESSORY_CATEGORIES } from "@/data/accessories";
-import { getProduct, priceLabel, relatedProducts } from "@/data/products";
+import { priceLabel } from "@/data/products";
+import { listPublicProducts } from "@/lib/catalogue.functions";
 import { useBranch } from "@/lib/branch-store";
 import { waLink, waMessages } from "@/lib/whatsapp";
 
 export const Route = createFileRoute("/phones/$productId")({
-  loader: ({ params }) => {
-    const product = getProduct(params.productId);
+  loader: async ({ params }) => {
+    const products = await listPublicProducts();
+    const product = products.find((p) => p.id === params.productId);
     if (!product) throw notFound();
-    return { product };
+    const related = products
+      .filter((p) => p.id !== product.id && (p.brand === product.brand || p.condition === product.condition))
+      .slice(0, 4);
+    return { product, related };
   },
   head: ({ loaderData }) => {
     if (!loaderData) {
@@ -58,7 +63,7 @@ export const Route = createFileRoute("/phones/$productId")({
 });
 
 function ProductPage() {
-  const { product } = Route.useLoaderData();
+  const { product, related } = Route.useLoaderData();
   const { branchId } = useBranch();
   const related = relatedProducts(product);
 
