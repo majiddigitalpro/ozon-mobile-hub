@@ -87,8 +87,9 @@ function PhonesPage() {
     minBattery: 0,
   });
 
+  const allProducts = Route.useLoaderData();
   const results = useMemo(() => {
-    const list = PRODUCTS.filter((p) => {
+    const list = allProducts.filter((p) => {
       if (filters.brands.length && !filters.brands.includes(p.brand)) return false;
       if (filters.condition !== "all" && p.condition !== filters.condition) return false;
       if (filters.os !== "all" && p.os !== filters.os) return false;
