@@ -17,12 +17,14 @@ import {
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { EmptyState, SectionHeading } from "@/components/site/Bits";
 import { ProductCard } from "@/components/site/ProductCard";
-import { BRANDS, PRODUCTS, type Product } from "@/data/products";
+import { BRANDS, type Product } from "@/data/products";
+import { listPublicProducts } from "@/lib/catalogue.functions";
 import { waMessages } from "@/lib/whatsapp";
 
 type Search = { brand?: string; q?: string };
 
 export const Route = createFileRoute("/phones/")({
+  loader: () => listPublicProducts(),
   validateSearch: (search: Record<string, unknown>): Search => {
     const validated: Search = {};
     if (typeof search["brand"] === "string") validated.brand = search["brand"];
