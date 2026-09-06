@@ -6,11 +6,13 @@ import accessoriesImg from "@/assets/accessories.jpg";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { EmptyState, SectionHeading } from "@/components/site/Bits";
-import { ACCESSORIES, ACCESSORY_CATEGORIES } from "@/data/accessories";
+import { ACCESSORY_CATEGORIES } from "@/data/accessories";
+import { listPublicAccessories } from "@/lib/catalogue.functions";
 import { useBranch } from "@/lib/branch-store";
 import { waLink, waMessages } from "@/lib/whatsapp";
 
 export const Route = createFileRoute("/accessories")({
+  loader: () => listPublicAccessories(),
   head: () => ({
     meta: [
       { title: "Smartphone Accessories in Triprayar & Chavakkad | Ozon Mobiles" },
@@ -41,15 +43,16 @@ function AccessoriesPage() {
   const [active, setActive] = useState<string>("All");
   const [query, setQuery] = useState("");
 
+  const allAccessories = Route.useLoaderData();
   const results = useMemo(
     () =>
-      ACCESSORIES.filter((a) => {
+      allAccessories.filter((a) => {
         if (active !== "All" && a.category !== active) return false;
         if (query.trim() && !`${a.name} ${a.category}`.toLowerCase().includes(query.toLowerCase()))
           return false;
         return true;
       }),
-    [active, query],
+    [allAccessories, active, query],
   );
 
   return (

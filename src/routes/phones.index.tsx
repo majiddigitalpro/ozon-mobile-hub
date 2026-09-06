@@ -17,12 +17,14 @@ import {
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { EmptyState, SectionHeading } from "@/components/site/Bits";
 import { ProductCard } from "@/components/site/ProductCard";
-import { BRANDS, PRODUCTS, type Product } from "@/data/products";
+import { BRANDS, type Product } from "@/data/products";
+import { listPublicProducts } from "@/lib/catalogue.functions";
 import { waMessages } from "@/lib/whatsapp";
 
 type Search = { brand?: string; q?: string };
 
 export const Route = createFileRoute("/phones/")({
+  loader: () => listPublicProducts(),
   validateSearch: (search: Record<string, unknown>): Search => {
     const validated: Search = {};
     if (typeof search["brand"] === "string") validated.brand = search["brand"];
@@ -85,8 +87,9 @@ function PhonesPage() {
     minBattery: 0,
   });
 
+  const allProducts = Route.useLoaderData();
   const results = useMemo(() => {
-    const list = PRODUCTS.filter((p) => {
+    const list = allProducts.filter((p) => {
       if (filters.brands.length && !filters.brands.includes(p.brand)) return false;
       if (filters.condition !== "all" && p.condition !== filters.condition) return false;
       if (filters.os !== "all" && p.os !== filters.os) return false;
@@ -122,7 +125,7 @@ function PhonesPage() {
       default:
         return [...list].sort((a, b) => Number(b.featured) - Number(a.featured));
     }
-  }, [filters, query, sort]);
+  }, [allProducts, filters, query, sort]);
 
   const activeCount =
     filters.brands.length +

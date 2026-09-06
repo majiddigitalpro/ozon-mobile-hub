@@ -4,11 +4,13 @@ import { useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { Badge, SectionHeading } from "@/components/site/Bits";
-import { activeOffers, OFFER_CATEGORIES } from "@/data/offers";
+import { OFFER_CATEGORIES } from "@/data/offers";
+import { listPublicOffers } from "@/lib/catalogue.functions";
 import { useBranch } from "@/lib/branch-store";
 import { waLink, waMessages } from "@/lib/whatsapp";
 
 export const Route = createFileRoute("/offers")({
+  loader: () => listPublicOffers(),
   head: () => ({
     meta: [
       { title: "Offers & EMI Deals | Ozon Mobiles Triprayar & Chavakkad" },
@@ -32,7 +34,8 @@ export const Route = createFileRoute("/offers")({
 function OffersPage() {
   const { branchId } = useBranch();
   const [category, setCategory] = useState<string>("All");
-  const offers = activeOffers().filter((o) => category === "All" || o.category === category);
+  const allOffers = Route.useLoaderData();
+  const offers = allOffers.filter((o) => category === "All" || o.category === category);
 
   return (
     <>
