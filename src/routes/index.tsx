@@ -23,13 +23,15 @@ import { ProductCard } from "@/components/site/ProductCard";
 import { BranchSwitcher } from "@/components/site/BranchSwitcher";
 import { FinalCta } from "@/components/site/FinalCta";
 import { BRANCHES, FINANCE_PARTNERS } from "@/data/branches";
-import { BRANDS, PRODUCTS } from "@/data/products";
+import { BRANDS } from "@/data/products";
 import { ACCESSORY_CATEGORIES } from "@/data/accessories";
 import { REPAIR_STEPS } from "@/data/repairs";
+import { listPublicProducts } from "@/lib/catalogue.functions";
 import { useBranch } from "@/lib/branch-store";
 import { waLink, waMessages } from "@/lib/whatsapp";
 
 export const Route = createFileRoute("/")({
+  loader: () => listPublicProducts(),
   head: () => ({
     meta: [
       { title: "Ozon Mobiles | Phones & Repair in Kerala" },
