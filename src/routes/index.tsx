@@ -132,7 +132,8 @@ const WHY = [
 
 function Home() {
   const { branchId } = useBranch();
-  const featured = PRODUCTS.filter((p) => p.featured).slice(0, 8);
+  const products = Route.useLoaderData();
+  const featured = products.filter((p) => p.featured).slice(0, 8);
 
   return (
     <>
