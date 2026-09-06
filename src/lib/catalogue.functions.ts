@@ -140,13 +140,27 @@ export const listPublicOffers = createServerFn({ method: "GET" }).handler(async 
 /* admin: role helpers                                                        */
 /* -------------------------------------------------------------------------- */
 
-async function assertAdmin(context: { supabase: ReturnType<typeof createClient>; userId: string }) {
+type RoleCheckContext = {
+  supabase: {
+    rpc: (
+      fn: "has_role",
+      args: { _user_id: string; _role: "admin" | "staff" },
+    ) => PromiseLike<{ data: unknown; error: { message: string } | null }>;
+  };
+  userId: string;
+};
+
+async function isAdmin(context: RoleCheckContext) {
   const { data, error } = await context.supabase.rpc("has_role", {
     _user_id: context.userId,
     _role: "admin",
   });
   if (error) throw new Error(error.message);
-  if (!data) throw new Error("Forbidden: admin access required");
+  return data === true;
+}
+
+async function assertAdmin(context: RoleCheckContext) {
+  if (!(await isAdmin(context))) throw new Error("Forbidden: admin access required");
 }
 
 export const getAdminStatus = createServerFn({ method: "GET" })
