@@ -140,7 +140,7 @@ function Home() {
       {/* HERO ---------------------------------------------------------- */}
       <section className="relative overflow-hidden bg-background">
         <div className="hero-wash absolute inset-0" aria-hidden="true" />
-        <div className="shell relative grid min-h-[calc(100svh-4rem)] items-center gap-6 pb-8 pt-12 md:min-h-[42rem] md:pb-12 md:pt-14 lg:grid-cols-[0.8fr_1.42fr] lg:gap-0 lg:py-12">
+        <div className="shell relative grid items-center gap-6 pb-8 pt-12 md:min-h-[42rem] md:pb-12 md:pt-14 lg:grid-cols-[0.8fr_1.42fr] lg:gap-0 lg:py-12">
           <div className="reveal relative z-20 lg:py-6">
             <p className="eyebrow text-electric">Triprayar · Chavakkad · Kerala</p>
             <h1 className="mt-5 max-w-[35rem] text-[2.35rem] font-extrabold leading-[1.08] text-foreground sm:text-5xl lg:text-[3.5rem]">
@@ -182,13 +182,13 @@ function Home() {
             </div>
           </div>
 
-          <div className="relative -mx-5 self-end sm:-mx-2 lg:-mr-24 lg:ml-[-2.75rem] lg:self-center">
+          <div className="relative -mx-5 self-end sm:-mx-2 lg:-mr-4 lg:ml-[-1.5rem] lg:self-center">
             <img
               src={heroProductLineup}
               alt="Apple, Samsung, OnePlus and Redmi smartphones with a tablet, smartwatch, boAt earbuds, Sony headphones and JBL speaker available at Ozon Mobiles"
               width={1376}
               height={768}
-              className="relative z-10 w-full scale-[1.04] object-contain drop-shadow-2xl lg:origin-left lg:scale-[1.08]"
+              className="relative z-10 w-full object-contain drop-shadow-2xl"
             />
           </div>
         </div>
