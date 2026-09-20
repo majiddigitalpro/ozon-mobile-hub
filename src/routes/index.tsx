@@ -14,7 +14,7 @@ import {
   Wrench,
 } from "lucide-react";
 
-import heroProductLineup from "@/assets/hero-product-lineup.png";
+import heroProductLineup from "@/assets/hero-product-lineup-branded.png";
 import repairBench from "@/assets/repair-bench.jpg";
 import accessoriesImg from "@/assets/accessories.jpg";
 import { Button } from "@/components/ui/button";
@@ -140,8 +140,8 @@ function Home() {
       {/* HERO ---------------------------------------------------------- */}
       <section className="relative overflow-hidden bg-background">
         <div className="hero-wash absolute inset-0" aria-hidden="true" />
-        <div className="shell relative grid min-h-[calc(100svh-4rem)] items-center gap-8 pb-10 pt-14 md:min-h-[42rem] md:pb-14 md:pt-16 lg:grid-cols-[0.82fr_1.35fr] lg:gap-4 lg:py-16">
-          <div className="reveal relative z-10 lg:py-6">
+        <div className="shell relative grid items-center gap-6 pb-8 pt-12 md:min-h-[42rem] md:pb-12 md:pt-14 lg:grid-cols-[0.8fr_1.42fr] lg:gap-0 lg:py-12">
+          <div className="reveal relative z-20 lg:py-6">
             <p className="eyebrow text-electric">Triprayar · Chavakkad · Kerala</p>
             <h1 className="mt-5 max-w-[35rem] text-[2.35rem] font-extrabold leading-[1.08] text-foreground sm:text-5xl lg:text-[3.5rem]">
               Your Phone.<br />
@@ -182,12 +182,12 @@ function Home() {
             </div>
           </div>
 
-          <div className="relative -mx-8 self-end sm:-mx-4 lg:-mr-28 lg:ml-[-4rem] lg:self-center">
+          <div className="relative -mx-5 self-end sm:-mx-2 lg:-mr-4 lg:ml-[-1.5rem] lg:self-center">
             <img
               src={heroProductLineup}
-              alt="Smartphones, tablet, smartwatch, earbuds, headphones and speaker available at Ozon Mobiles"
-              width={1600}
-              height={912}
+              alt="Apple, Samsung, OnePlus and Redmi smartphones with a tablet, smartwatch, boAt earbuds, Sony headphones and JBL speaker available at Ozon Mobiles"
+              width={1376}
+              height={768}
               className="relative z-10 w-full object-contain drop-shadow-2xl"
             />
           </div>
