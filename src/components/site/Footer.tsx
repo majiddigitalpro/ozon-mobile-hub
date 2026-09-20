@@ -23,8 +23,10 @@ const services = [
 
 export function Footer() {
   return (
-    <footer className="surface-dark mt-px">
-      <div className="shell grid gap-10 py-14 md:grid-cols-2 lg:grid-cols-5 lg:py-16">
+    <footer className="glass-stage pb-20 pt-0 lg:pb-7">
+      <div className="shell">
+      <div className="glass-panel overflow-hidden">
+      <div className="grid gap-10 px-6 py-12 md:grid-cols-2 md:px-10 lg:grid-cols-5 lg:px-12 lg:py-14">
         <div className="lg:col-span-2">
           <Logo onDark />
           <p className="mt-4 max-w-sm text-sm leading-relaxed text-navy-foreground/70">
@@ -115,8 +117,8 @@ export function Footer() {
         </div>
       </div>
 
-      <div className="border-t border-navy-foreground/10">
-        <div className="shell flex flex-col gap-3 py-6 text-xs text-navy-foreground/60 sm:flex-row sm:items-center sm:justify-between">
+      <div className="border-t border-navy-foreground/10 bg-navy-deep/20">
+        <div className="flex flex-col gap-3 px-6 py-6 text-xs text-navy-foreground/60 sm:flex-row sm:items-center sm:justify-between md:px-10 lg:px-12">
           <p>© {new Date().getFullYear()} Ozon Mobiles. All About Mobiles.</p>
           <div className="flex gap-5">
             <a href="/privacy" className="hover:text-navy-foreground">
@@ -130,6 +132,8 @@ export function Footer() {
             </Link>
           </div>
         </div>
+      </div>
+      </div>
       </div>
     </footer>
   );

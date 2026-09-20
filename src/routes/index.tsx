@@ -195,15 +195,22 @@ function Home() {
       </section>
 
       {/* TRUST STRIP --------------------------------------------------- */}
-      <section aria-label="Why customers trust Ozon Mobiles" className="border-b border-border bg-surface">
-        <ul className="shell grid grid-cols-2 gap-x-6 gap-y-4 py-6 sm:grid-cols-3 lg:grid-cols-5">
-          {TRUST.map(({ icon: Icon, label }) => (
-            <li key={label} className="flex items-center gap-2.5 text-xs font-semibold sm:text-sm">
-              <Icon aria-hidden="true" className="size-4 shrink-0 text-electric" />
-              {label}
-            </li>
-          ))}
-        </ul>
+      <section aria-label="Why customers trust Ozon Mobiles" className="glass-stage py-5 sm:py-7">
+        <div className="shell">
+          <ul className="glass-panel grid grid-cols-2 gap-1 p-2 sm:grid-cols-3 lg:grid-cols-5">
+            {TRUST.map(({ icon: Icon, label }) => (
+              <li
+                key={label}
+                className="glass-trust-item flex min-h-16 items-center gap-2.5 rounded-lg px-3 py-3 text-xs font-semibold text-navy-foreground sm:min-h-20 sm:px-4 sm:text-sm"
+              >
+                <span className="flex size-8 shrink-0 items-center justify-center rounded-lg border border-navy-foreground/15 bg-navy-foreground/8">
+                  <Icon aria-hidden="true" className="size-4 text-cyan" />
+                </span>
+                {label}
+              </li>
+            ))}
+          </ul>
+        </div>
       </section>
 
       {/* FOUR CORE SERVICES ------------------------------------------- */}

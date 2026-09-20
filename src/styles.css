@@ -59,6 +59,7 @@
   --color-tint-cyan: var(--tint-cyan);
   --color-tint-sand: var(--tint-sand);
   --color-tint-mint: var(--tint-mint);
+  --color-glass-violet: var(--glass-violet);
 
   --shadow-card: 0 1px 2px oklch(0.2 0.05 260 / 6%), 0 8px 24px -12px oklch(0.2 0.05 260 / 14%);
   --shadow-lift: 0 2px 4px oklch(0.2 0.05 260 / 8%), 0 18px 40px -18px oklch(0.2 0.05 260 / 26%);
@@ -111,6 +112,7 @@
   --whatsapp: oklch(0.63 0.16 150);
   --whatsapp-foreground: oklch(0.99 0.005 250);
   --gold: oklch(0.87 0.17 96);
+  --glass-violet: oklch(0.52 0.2 298);
 }
 
 .dark {
@@ -228,6 +230,42 @@
   background: oklch(0.235 0.055 265 / 55%);
   backdrop-filter: blur(14px) saturate(140%);
   border: 1px solid oklch(1 0 0 / 10%);
+}
+
+@utility glass-stage {
+  background:
+    radial-gradient(90% 110% at 4% 18%, color-mix(in oklab, var(--cyan-accent) 36%, transparent), transparent 62%),
+    radial-gradient(90% 110% at 96% 82%, color-mix(in oklab, var(--glass-violet) 34%, transparent), transparent 62%),
+    linear-gradient(145deg, var(--navy-deep), oklch(0.17 0.08 276) 52%, var(--navy));
+  color: var(--navy-foreground);
+}
+
+@utility glass-panel {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid oklch(1 0 0 / 18%);
+  border-radius: calc(var(--radius) + 0.5rem);
+  background: linear-gradient(145deg, oklch(1 0 0 / 11%), oklch(1 0 0 / 4%));
+  box-shadow:
+    inset 0 1px 0 oklch(1 0 0 / 12%),
+    0 24px 64px -32px oklch(0.08 0.08 280 / 70%);
+  backdrop-filter: blur(24px) saturate(145%);
+}
+
+@utility glass-cta {
+  background:
+    linear-gradient(105deg, color-mix(in oklab, var(--cyan-accent) 10%, transparent), transparent 38%),
+    linear-gradient(255deg, color-mix(in oklab, var(--glass-violet) 12%, transparent), transparent 42%),
+    oklch(1 0 0 / 6%);
+}
+
+@utility glass-trust-item {
+  background: oklch(1 0 0 / 4%);
+  transition: background-color 180ms ease, border-color 180ms ease, transform 180ms ease;
+  &:hover {
+    background: oklch(1 0 0 / 9%);
+    transform: translateY(-1px);
+  }
 }
 
 @utility eyebrow {
