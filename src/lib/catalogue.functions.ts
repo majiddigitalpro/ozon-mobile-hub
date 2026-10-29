@@ -7,6 +7,7 @@ import type { BranchId } from "@/data/branches";
 import type { Accessory, AccessoryCategory } from "@/data/accessories";
 import type { Offer, OfferCategory } from "@/data/offers";
 import type { Product } from "@/data/products";
+import { readPublicCatalogue } from "./catalogue-resilience";
 
 /* -------------------------------------------------------------------------- */
 /* helpers                                                                    */
@@ -107,33 +108,30 @@ function mapOffer(row: ProductRow): Offer {
 /* -------------------------------------------------------------------------- */
 
 export const listPublicProducts = createServerFn({ method: "GET" }).handler(async () => {
-  const { data, error } = await publicClient()
+  const data = await readPublicCatalogue(() => publicClient()
     .from("products")
     .select("*")
     .eq("published", true)
-    .order("sort_order", { ascending: true });
-  if (error) throw new Error(error.message);
-  return (data ?? []).map(mapProduct);
+    .order("sort_order", { ascending: true }));
+  return data.map(mapProduct);
 });
 
 export const listPublicAccessories = createServerFn({ method: "GET" }).handler(async () => {
-  const { data, error } = await publicClient()
+  const data = await readPublicCatalogue(() => publicClient()
     .from("accessories")
     .select("*")
     .eq("published", true)
-    .order("sort_order", { ascending: true });
-  if (error) throw new Error(error.message);
-  return (data ?? []).map(mapAccessory);
+    .order("sort_order", { ascending: true }));
+  return data.map(mapAccessory);
 });
 
 export const listPublicOffers = createServerFn({ method: "GET" }).handler(async () => {
-  const { data, error } = await publicClient()
+  const data = await readPublicCatalogue(() => publicClient()
     .from("offers")
     .select("*")
     .eq("active", true)
-    .order("created_at", { ascending: false });
-  if (error) throw new Error(error.message);
-  return (data ?? []).map(mapOffer);
+    .order("created_at", { ascending: false }));
+  return data.map(mapOffer);
 });
 
 /* -------------------------------------------------------------------------- */
